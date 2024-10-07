@@ -2,8 +2,10 @@ import express from "express";
 import router from "./src/routers/index.router.js";
 import morgan from "morgan";
 import cors from "cors";
+import { engine } from "express-handlebars";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
+import __dirname from "./utils.js";
 
 try {
   //primero, creo el server
@@ -24,6 +26,13 @@ try {
   //middleware: hago que se crucen los origenes de los puertos de back con los de front
   server.use(cors());
   server.use("/public", express.static("public"));
+
+  //activo funcionalidades del motor de plantillas
+  server.engine("handlebars", engine());
+  //defino que es handlebars
+  server.set("view engine", "handlebars");
+  //defino la ruta hacia las vistas
+  server.set("views", __dirname + "/src/views");
 
   //hace que mi servidor use las rutas del enrutador
   server.use(router);

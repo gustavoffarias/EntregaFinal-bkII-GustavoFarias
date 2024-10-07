@@ -109,4 +109,34 @@ async function create(req, res, next) {
   }
 }
 
-export { getAllProducts, createGet, getProduct, update, deleteProduct, create };
+async function showProducts(req, res, next) {
+  try {
+    let { category } = req.query;
+    let all;
+    if (!category) {
+      all = await productsManager.read();
+    } else {
+      all = await productsManager.read(category);
+    }
+
+    if (alle.length > 0) {
+      return res.render("products", { data: all });
+    } else {
+      const error = new Error("ERROR 404, CATEGORY NOT FOUND");
+      error.statusCode = 404;
+      throw error;
+    }
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export {
+  getAllProducts,
+  createGet,
+  getProduct,
+  update,
+  deleteProduct,
+  create,
+  showProducts,
+};
