@@ -25,6 +25,7 @@ try {
   server.use(express.json());
   //middleware: hago que se crucen los origenes de los puertos de back con los de front
   server.use(cors());
+  //configuro el acceso a la carpeta public
   server.use("/public", express.static("public"));
 
   //activo funcionalidades del motor de plantillas

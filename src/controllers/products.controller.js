@@ -119,15 +119,34 @@ async function showProducts(req, res, next) {
       all = await productsManager.read(category);
     }
 
-    if (alle.length > 0) {
-      return res.render("products", { data: all });
+    console.log('Productos obtenidos:', all);
+
+    if (all.length > 0) {
+      return res.render("products", { products: all });
     } else {
-      const error = new Error("ERROR 404, CATEGORY NOT FOUND");
+      const error = new Error("ERROR 404, NOT FOUND PRODUCTS");
       error.statusCode = 404;
       throw error;
     }
   } catch (error) {
     return next(error);
+  }
+}
+
+async function showOneProducts(req, res, next) {
+  try {
+    // Obtener el ID del producto
+    const { pid } = req.params;
+    const response = await productsManager.readOne(pid);
+    if (response) {
+      return res.render("oneproduct",  {oneproduct: response});
+    } else {
+      const error = new Error("ERROR 404, PRODUCT NOT FOUND");
+      error.statusCode = 404;
+      throw error;
+    }
+  } catch (error) {
+    next(error);
   }
 }
 
@@ -139,4 +158,5 @@ export {
   deleteProduct,
   create,
   showProducts,
+  showOneProducts
 };

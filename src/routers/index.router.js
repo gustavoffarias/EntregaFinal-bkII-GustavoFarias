@@ -6,7 +6,7 @@ import viewRouter from "./views/index.view.js";
 
 const router = Router();
 
-router.get("/", viewRouter);
+router.use("/", viewRouter);
 router.use("/api", apiRouter);
 
 export default router;

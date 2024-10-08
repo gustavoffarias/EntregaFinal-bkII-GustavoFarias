@@ -1,2 +1,37 @@
-<h2>PRODUCTS</h2>
-<h3>producto uno</h3>
+<h2>PRODUCTOS</h2>
+<section class="d-flex flex-wrap justify-content-around">
+  {{!iteramos con  #each la variable products }}
+  {{#each products}}
+    <div class="card" style="width: 18rem;">
+      <img src="../../public/assets/AceiteMineral1003.png" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <a href="/products/{{this.id}}">
+          {{#if this.title}}
+            <h3 class="card-title">{{this.title}}</h3>
+          {{else}}
+            <h3 class="card-title">Producto SIN NOMBRE</h3>
+          {{/if}}
+        </a>
+
+        {{#if this.category}}
+          <h4>{{this.category}}</h4>
+        {{else}}
+          <h4>Producto SIN CATEGORIA</h4>
+        {{/if}}
+
+        {{#if this.price}}
+          <h4>${{this.price}}</h4>
+        {{else}}
+          <h4>$0</h4>
+        {{/if}}
+
+        {{#if this.stock}}
+          <h4>{{this.stock}} Un.</h4>
+        {{else}}
+          <h4>0 Un.</h4>
+        {{/if}}
+        <a href="/products/{{this.id}}" class="btn btn-primary">Ver Producto</a>
+      </div>
+    </div>
+  {{/each}}
+</section>
