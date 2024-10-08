@@ -3,9 +3,12 @@ import router from "./src/routers/index.router.js";
 import morgan from "morgan";
 import cors from "cors";
 import { engine } from "express-handlebars";
+import { Server } from "socket.io";
+import { createServer } from "http";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import __dirname from "./utils.js";
+import socketCb from "./src/routers/index.socket.js";
 
 try {
   //primero, creo el server
@@ -14,8 +17,18 @@ try {
   const port = 8000;
   //tercero, definimos una callback que se ejecutara cuando se inicia el servidor
   const ready = () => console.log("PORT SERVER " + port);
+  //definimos un server http con las configuraciones del server express
+  const httpServer = createServer(server);
+  //deinimos server TCP
+  const tcpServer = new Server(httpServer);
+  //configuramos las llamadas
+  tcpServer.on("connection", socketCb);
+
   //cuarto, iniciamos el servidor, con listen escuchamos el puerto de la variable "port" para iniciar el server, luego ejecutamos la callback
-  server.listen(port, ready);
+  //server.listen(port, ready);
+  
+  //Iniciamos el servidor HTTP
+  httpServer.listen(port, ready);
 
   //obligo a mi servidor a usar morgan: middleware de terceros (registro de solicitudes)
   server.use(morgan("dev"));
