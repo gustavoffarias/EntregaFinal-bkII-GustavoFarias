@@ -1,3 +1,4 @@
+import "dotenv/config.js";
 import express from "express";
 import router from "./src/routers/index.router.js";
 import morgan from "morgan";
@@ -9,14 +10,18 @@ import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import __dirname from "./utils.js";
 import socketCb from "./src/routers/index.socket.js";
+import dbConnect from "./src/utils/db.utils.js";
 
 try {
   //primero, creo el server
   const server = express();
-  //segundo, creamos un puerto local para el servidor backend
-  const port = 8000;
+  //segundo, creamos un puerto con la variable de entorno (puerto de Mongo)
+  const port = process.env.PORT || 8000;
   //tercero, definimos una callback que se ejecutara cuando se inicia el servidor
-  const ready = () => console.log("PORT SERVER " + port);
+  const ready = async () => {
+    console.log("PORT SERVER " + port);
+    await dbConnect();
+  };
   //definimos un server http con las configuraciones del server express
   const httpServer = createServer(server);
   //deinimos server TCP
@@ -26,7 +31,7 @@ try {
 
   //cuarto, iniciamos el servidor, con listen escuchamos el puerto de la variable "port" para iniciar el server, luego ejecutamos la callback
   //server.listen(port, ready);
-  
+
   //Iniciamos el servidor HTTP
   httpServer.listen(port, ready);
 
