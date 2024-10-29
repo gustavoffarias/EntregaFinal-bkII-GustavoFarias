@@ -10,29 +10,38 @@ class ProductsMongoManager {
     }
   }
 
-  readAll() {
+  async readAll() {
     try {
+      const all = await Product.find();
+      return all;
     } catch (error) {
       throw error;
     }
   }
 
-  read() {
+  async read(pid) {
     try {
+      const one = await Product.findById(pid);
+      return one;
     } catch (error) {
       throw error;
     }
   }
 
-  update() {
+  async update(pid, data) {
     try {
+      const opts = { new: true };
+      const one = await Product.findByIdAndUpdate(pid, data, opts);
+      return one;
     } catch (error) {
       throw error;
     }
   }
 
-  destroy() {
+  async destroy(pid) {
     try {
+      const one = await Product.findByIdAndDelete(pid);
+      return one;
     } catch (error) {
       throw error;
     }

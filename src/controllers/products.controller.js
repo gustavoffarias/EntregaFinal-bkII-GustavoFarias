@@ -1,5 +1,6 @@
 import productsManager from "../data/memory/products.manager.js";
 import productsMongoManager from "../data/mongo/managers/product.mongo.js";
+import { response } from "express";
 
 //Con FIle Sistem
 async function getAllProducts(req, res, next) {
@@ -121,7 +122,7 @@ async function showProducts(req, res, next) {
       all = await productsManager.read(category);
     }
 
-    console.log('Productos obtenidos:', all);
+    console.log("Productos obtenidos:", all);
 
     if (all.length > 0) {
       return res.render("products", { products: all });
@@ -141,7 +142,7 @@ async function showOneProducts(req, res, next) {
     const { pid } = req.params;
     const response = await productsManager.readOne(pid);
     if (response) {
-      return res.render("oneproduct",  {oneproduct: response});
+      return res.render("oneproduct", { oneproduct: response });
     } else {
       const error = new Error("ERROR 404, PRODUCT NOT FOUND");
       error.statusCode = 404;
@@ -152,12 +153,11 @@ async function showOneProducts(req, res, next) {
   }
 }
 
-
 //Con Mongo
 async function create(req, res, next) {
   try {
     const data = req.body;
-    const responseManager = await productsMongoManager.create(data);
+    const response = await productsMongoManager.create(data);
     return res
       .status(201)
       .json({ message: "PRODUCT CREATED", response: response._id });
@@ -168,11 +168,14 @@ async function create(req, res, next) {
 
 async function readAll(req, res, next) {
   try {
-    const data = req.body;
-    const responseManager = await productsMongoManager.create(data);
-    return res
-      .status(201)
-      .json({ message: "PRODUCT CREATED", response: response._id });
+    const response = await productsMongoManager.readAll();
+    if (response) {
+      return res.status(200).json({ message: "PRODUCTS READ", response });
+    } else {
+      const error = new Error("PRODUCTS NOT FOUND");
+      error.statusCode = 404;
+      throw error;
+    }
   } catch (error) {
     return next(error);
   }
@@ -180,11 +183,15 @@ async function readAll(req, res, next) {
 
 async function read(req, res, next) {
   try {
-    const data = req.body;
-    const responseManager = await productsMongoManager.create(data);
-    return res
-      .status(201)
-      .json({ message: "PRODUCT CREATED", response: response._id });
+    const { pid } = req.params;
+    const response = await productsMongoManager.read(pid);
+    if (response) {
+      return res.status(200).json({ message: "PRODUCT READ", response });
+    } else {
+      const error = new Error("PRODUCT NOT FOUND");
+      error.statusCode = 404;
+      throw error;
+    }
   } catch (error) {
     return next(error);
   }
@@ -192,11 +199,16 @@ async function read(req, res, next) {
 
 async function update(req, res, next) {
   try {
+    const { pid } = req.params;
     const data = req.body;
-    const responseManager = await productsMongoManager.create(data);
-    return res
-      .status(201)
-      .json({ message: "PRODUCT CREATED", response: response._id });
+    const response = await productsMongoManager.update(pid, data);
+    if (response) {
+      return res.status(200).json({ message: "PRODUCT UPDATE", response });
+    } else {
+      const error = new Error("PRODUCT NOT FOUND");
+      error.statusCode = 404;
+      throw error;
+    }
   } catch (error) {
     return next(error);
   }
@@ -204,11 +216,15 @@ async function update(req, res, next) {
 
 async function destroy(req, res, next) {
   try {
-    const data = req.body;
-    const responseManager = await productsMongoManager.create(data);
-    return res
-      .status(201)
-      .json({ message: "PRODUCT CREATED", response: response._id });
+    const { pid } = req.params;
+    const response = await productsMongoManager.destroy(pid);
+    if (response) {
+      return res.status(200).json({ message: "PRODUCT DELETED", response });
+    } else {
+      const error = new Error("PRODUCT NOT FOUND");
+      error.statusCode = 404;
+      throw error;
+    }
   } catch (error) {
     return next(error);
   }

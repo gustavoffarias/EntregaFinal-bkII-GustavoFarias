@@ -19,8 +19,8 @@ import validData from "../../middlewares/validData.mid.js";
 const productsRouter = Router();
 
 //rutas de products
-productsRouter.get("/", getAllProducts);
-productsRouter.get("/:pid", getProduct);
+productsRouter.get("/", readAll);
+productsRouter.get("/:pid", read);
 // Ruta par crear un products, por ejemplo /producto/titulo del producto/categoria/10000
 productsRouter.get("/:title/:photo/:category/:price", createGet);
 // Ruta par crear un producto
@@ -28,6 +28,6 @@ productsRouter.post("/", create);
 // Ruta para actualizar
 productsRouter.put("/:pid", update);
 // Ruta para eliminar
-productsRouter.delete("/:pid", deleteProduct);
+productsRouter.delete("/:pid", destroy);
 
 export default productsRouter;
