@@ -1,5 +1,7 @@
 import productsManager from "../data/memory/products.manager.js";
+import productsMongoManager from "../data/mongo/managers/product.mongo.js";
 
+//Con FIle Sistem
 async function getAllProducts(req, res, next) {
   try {
     let { category } = req.query;
@@ -61,7 +63,7 @@ async function getProduct(req, res, next) {
   }
 }
 
-async function update(req, res, next) {
+/*async function update(req, res, next) {
   try {
     const { pid } = req.params;
     // Obtener los datos de actualización del cuerpo de la solicitud
@@ -78,7 +80,7 @@ async function update(req, res, next) {
   } catch (error) {
     next(error);
   }
-}
+}*/
 
 async function deleteProduct(req, res, next) {
   try {
@@ -97,7 +99,7 @@ async function deleteProduct(req, res, next) {
   }
 }
 
-async function create(req, res, next) {
+/*async function create(req, res, next) {
   try {
     const data = req.body;
     const responseManager = await productsManager.create(data);
@@ -107,7 +109,7 @@ async function create(req, res, next) {
   } catch (error) {
     return next(error);
   }
-}
+}*/
 
 async function showProducts(req, res, next) {
   try {
@@ -150,13 +152,79 @@ async function showOneProducts(req, res, next) {
   }
 }
 
+
+//Con Mongo
+async function create(req, res, next) {
+  try {
+    const data = req.body;
+    const responseManager = await productsMongoManager.create(data);
+    return res
+      .status(201)
+      .json({ message: "PRODUCT CREATED", response: response._id });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+async function readAll(req, res, next) {
+  try {
+    const data = req.body;
+    const responseManager = await productsMongoManager.create(data);
+    return res
+      .status(201)
+      .json({ message: "PRODUCT CREATED", response: response._id });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+async function read(req, res, next) {
+  try {
+    const data = req.body;
+    const responseManager = await productsMongoManager.create(data);
+    return res
+      .status(201)
+      .json({ message: "PRODUCT CREATED", response: response._id });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+async function update(req, res, next) {
+  try {
+    const data = req.body;
+    const responseManager = await productsMongoManager.create(data);
+    return res
+      .status(201)
+      .json({ message: "PRODUCT CREATED", response: response._id });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+async function destroy(req, res, next) {
+  try {
+    const data = req.body;
+    const responseManager = await productsMongoManager.create(data);
+    return res
+      .status(201)
+      .json({ message: "PRODUCT CREATED", response: response._id });
+  } catch (error) {
+    return next(error);
+  }
+}
 export {
   getAllProducts,
   createGet,
   getProduct,
-  update,
+  //update,
   deleteProduct,
-  create,
+  //create,
   showProducts,
-  showOneProducts
+  showOneProducts,
+  create,
+  readAll,
+  read,
+  update,
+  destroy,
 };
