@@ -1,26 +1,31 @@
 import { Router } from "express";
 import {
   createUser,
-  createGetUser, 
+  createGetUser,
   deleteUser,
   readAllUsers,
   readUserId,
   updateUser,
+  create,
+  readAll,
+  read,
+  update,
+  destroy,
 } from "../../controllers/users.controller.js";
 import validDataUsers from "../../middlewares/validDataUsers.mid.js";
 
 const usersRouter = Router();
 
 //rutas de users
-usersRouter.get("/", readAllUsers);
-usersRouter.get("/:uid", readUserId);
+usersRouter.get("/", readAll);
+usersRouter.get("/:uid", read);
 // Ruta par crear un usuario, por ejemplo /users/user.png/user@gmail.com/963147
-usersRouter.get("/:photo/:email/:password",  createGetUser);
+usersRouter.get("/:photo/:email/:password", create);
 // Ruta para crear
-usersRouter.post("/", validDataUsers, createUser);
+usersRouter.post("/", create);
 // Ruta para actualizar
-usersRouter.put("/:uid", updateUser);
+usersRouter.put("/:uid", update);
 // Ruta para eliminar
-usersRouter.delete("/:uid", deleteUser);
+usersRouter.delete("/:uid", destroy);
 
 export default usersRouter;
