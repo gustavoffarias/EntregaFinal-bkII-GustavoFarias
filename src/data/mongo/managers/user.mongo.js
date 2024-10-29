@@ -48,5 +48,5 @@ class UsersMongoManager {
   }
 }
 
-const UsersMongoManager = new UsersMongoManager();
+const usersMongoManager = new UsersMongoManager();
 export default UsersMongoManager;

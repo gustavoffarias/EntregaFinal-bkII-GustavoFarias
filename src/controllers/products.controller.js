@@ -229,6 +229,7 @@ async function destroy(req, res, next) {
     return next(error);
   }
 }
+
 export {
   getAllProducts,
   createGet,
