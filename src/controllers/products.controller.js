@@ -3,7 +3,7 @@ import productsMongoManager from "../data/mongo/managers/product.mongo.js";
 import { response } from "express";
 import Controller from "./controller.js";
 
-//Con FIle Sistem
+//Con File System
 async function getAllProducts(req, res, next) {
   try {
     let { category } = req.query;

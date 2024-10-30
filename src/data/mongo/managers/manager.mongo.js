@@ -3,34 +3,34 @@ class MongoManager {
     this.model = model;
   }
 
-  async create(data) {
+  create = async (data) => {
     try {
       const one = await this.model.create(data);
       return one;
     } catch (error) {
       throw error;
     }
-  }
+  };
 
-  async readAll(filter) {
+  readAll = async (filter) => {
     try {
       const all = await this.model.find(filter);
       return all;
     } catch (error) {
       throw error;
     }
-  }
+  };
 
-  async read(pid) {
+  read = async (pid) => {
     try {
       const one = await this.model.findById(pid);
       return one;
     } catch (error) {
       throw error;
     }
-  }
+  };
 
-  async update(pid, data) {
+  update = async (pid, data) => {
     try {
       const opts = { new: true };
       const one = await this.model.findByIdAndUpdate(pid, data, opts);
@@ -38,16 +38,16 @@ class MongoManager {
     } catch (error) {
       throw error;
     }
-  }
+  };
 
-  async destroy(pid) {
+  destroy = async (pid) => {
     try {
       const one = await this.model.findByIdAndDelete(pid);
       return one;
     } catch (error) {
       throw error;
     }
-  }
+  };
 }
 
 export default MongoManager;
