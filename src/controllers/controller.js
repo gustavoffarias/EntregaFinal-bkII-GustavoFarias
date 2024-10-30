@@ -16,6 +16,26 @@ class Controller {
     }
   };
 
+  createGet = async (req, res, next) => {
+    try {
+      const { title, photo, category, price } = req.params;
+      let { stock } = req.query;
+      if (!stock) {
+        stock = 0;
+      }
+      const response = await this.manager.create({
+        title,
+        photo,
+        category,
+        price,
+        stock,
+      });
+      return res.status(201).json({ message: "PRODUCT CREATED", response });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   readAll = async (req, res, next) => {
     try {
       const filter = req.query;

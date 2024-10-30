@@ -30,7 +30,7 @@ async function readAllUsers(req, res, next) {
   }
 }
 
-async function createGetUser(req, res, next) {
+/*async function createGetUser(req, res, next) {
   try {
     const { photo, email, password } = req.params;
     let { role } = req.query;
@@ -47,7 +47,7 @@ async function createGetUser(req, res, next) {
   } catch (error) {
     next(error);
   }
-}
+}*/
 
 async function readUserId(req, res, next) {
   try {
@@ -119,11 +119,11 @@ const registerView = async (req, res, next) => {
 
 //Con Mongo
 const usersController = new Controller(usersMongoManager, "USERS");
-const { create, readAll, read, update, destroy } = usersController;
+const { create, createGet, readAll, read, update, destroy } = usersController;
 
 export {
   createUser,
-  createGetUser,
+  createGet,
   readAllUsers,
   readUserId,
   updateUser,

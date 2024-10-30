@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
   createUser,
-  createGetUser,
+  createGet,
   deleteUser,
   readAllUsers,
   readUserId,
@@ -20,7 +20,7 @@ const usersRouter = Router();
 usersRouter.get("/", readAll);
 usersRouter.get("/:uid", read);
 // Ruta par crear un usuario, por ejemplo /users/user.png/user@gmail.com/963147
-usersRouter.get("/:photo/:email/:password", create);
+usersRouter.get("/:email/:password/:photo", createGet);
 // Ruta para crear
 usersRouter.post("/", create);
 // Ruta para actualizar

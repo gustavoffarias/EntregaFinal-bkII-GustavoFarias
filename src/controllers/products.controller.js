@@ -28,7 +28,7 @@ async function getAllProducts(req, res, next) {
   }
 }
 
-async function createGet(req, res, next) {
+/*async function createGet(req, res, next) {
   try {
     const { title, photo, category, price } = req.params;
     let { stock } = req.query;
@@ -46,7 +46,8 @@ async function createGet(req, res, next) {
   } catch (error) {
     next(error);
   }
-}
+}*/
+
 
 async function getProduct(req, res, next) {
   try {
@@ -156,7 +157,7 @@ async function showOneProducts(req, res, next) {
 
 //Con Mongo
 const productsController = new Controller(productsMongoManager, "PRODUCTS");
-const { create, readAll, read, update, destroy } = productsController;
+const { create, createGet, readAll, read, update, destroy } = productsController;
 
 export {
   getAllProducts,

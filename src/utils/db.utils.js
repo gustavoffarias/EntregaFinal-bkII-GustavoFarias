@@ -5,7 +5,7 @@ async function dbConnect() {
     await connect(process.env.DB_LINK);
     console.log("mongo db connected");
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 }
 
