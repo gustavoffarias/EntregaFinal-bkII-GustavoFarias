@@ -2,12 +2,13 @@
 const socket = io();
 
 document.querySelector("#register").addEventListener("click", () => {
-  const name = document.querySelector("#name").value;
+  const firstName = document.querySelector("#firstName").value;
+  const lastName = document.querySelector("#lastName").value;
+  const age = document.querySelector("#age").value;
   const email = document.querySelector("#email").value;
   const password = document.querySelector("#password").value;
-  const photo = document.querySelector("#photo").value;
 
-  const userDate = { name, email, password, photo };
+  const userDate = { firstName, lastName, age, email, password };
 
   //creamos el nuevo usuario
   socket.emit("new user", userDate);

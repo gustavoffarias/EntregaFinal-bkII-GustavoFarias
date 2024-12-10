@@ -1,4 +1,5 @@
-{
+[
+  {
     "_id": {
       "$oid": "6757a2f7bc92e416649b9d93"
     },
@@ -9,4 +10,109 @@
     "password": 1234,
     "cartId": 1,
     "role": "user"
+  },
+  {
+    "firstName": "Gustavo",
+    "lastName": "Farias",
+    "age": "33",
+    "email": "gustavo.f@hotmail.com",
+    "password": "1234",
+    "id": "90bc46efe2c046644a2cb81d"
+  },
+  {
+    "firstName": "Gustavo",
+    "lastName": "Farias",
+    "age": "33",
+    "email": "gustavo.f@hotmail.com",
+    "password": "1234",
+    "id": "097528b9c399846869274b45"
+  },
+  {
+    "firstName": "Gustavo",
+    "lastName": "",
+    "age": "",
+    "email": "g@live.com",
+    "password": "",
+    "id": "83fdf31316375c060b9dc939"
+  },
+  {
+    "firstName": "Gustavo",
+    "lastName": "F",
+    "age": "1",
+    "email": "g@live.com",
+    "password": "1",
+    "id": "e738a07809f913f9017d7052"
+  },
+  {
+    "firstName": "Gustavo",
+    "lastName": "Farias",
+    "age": "33",
+    "email": "gustavo.f.farias@hotmail.com",
+    "password": "1234",
+    "id": "cebb85a9595317ffefa27327"
+  },
+  {
+    "firstName": "Gustavo",
+    "lastName": "Farias",
+    "age": "33",
+    "email": "gustavo.f.farias@hotmail.com",
+    "password": "1234",
+    "id": "23f8e4966cc550ee99a9c387"
+  },
+  {
+    "firstName": "Gustavo",
+    "lastName": "Farias",
+    "age": "",
+    "email": "gustavo.f.farias@hotmail.com",
+    "password": "",
+    "id": "ddb8f0c8573a99a36459d76a"
+  },
+  {
+    "firstName": "Gustavo",
+    "lastName": "Farias",
+    "age": "",
+    "email": "gustavo.f.farias@hotmail.com",
+    "password": "",
+    "id": "6da0bfd01dbbcc0f7eba855a"
+  },
+  {
+    "firstName": "Gustavo",
+    "lastName": "Farias",
+    "age": "",
+    "email": "gustavo.f.farias@hotmail.com",
+    "password": "",
+    "id": "051cfc783fb2564a99cecce2"
+  },
+  {
+    "firstName": "Gustavo",
+    "lastName": "Farias",
+    "age": "",
+    "email": "gustavo.f.farias@hotmail.com",
+    "password": "",
+    "id": "78f46d8a9495b693c52f33a1"
+  },
+  {
+    "firstName": "Gustavo",
+    "lastName": "Farias",
+    "age": "",
+    "email": "gustavo.f.farias@hotmail.com",
+    "password": "",
+    "id": "5f276dea6d692c8c11c70da5"
+  },
+  {
+    "firstName": "Gustavo",
+    "lastName": "Farias",
+    "age": "",
+    "email": "gustavo.f.farias@hotmail.com",
+    "password": "",
+    "id": "ef3943ad2bf9024843fdde77"
+  },
+  {
+    "firstName": "Gustavo",
+    "lastName": "Farias",
+    "age": "",
+    "email": "gustavo.f.farias@hotmail.com",
+    "password": "",
+    "id": "fdcc8383cc46ae0d2f6119c7"
   }
+]

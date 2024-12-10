@@ -12,6 +12,10 @@ import __dirname from "./utils.js";
 import socketCb from "./src/routers/index.socket.js";
 import dbConnect from "./src/utils/db.utils.js";
 import cookieParser from "cookie-parser";
+import path from "path";
+import loginRouter from "./src/routers/login.router.js";
+import viewsRouter from "./src/routers/views.router.js";
+import session from "express-session";
 
 try {
   //primero, creo el server
@@ -41,7 +45,17 @@ try {
   //habilita la lectura de datos complejos en la url
   server.use(express.urlencoded({ extended: true }));
   //habilito las cookies
-  server.use(cookieParser());
+  server.use(cookieParser(process.env.SECRET_KEY));
+
+  const sessionConfig = {
+    secret: process.env.SECRET_KEY,
+    cookie: { maxAge: 30000 },
+    saveUninitialized: true,
+    resave: false,
+  };
+
+  server.use(session(sessionConfig));
+
   //activo funcionabilidad de json
   server.use(express.json());
   //middleware: hago que se crucen los origenes de los puertos de back con los de front
@@ -49,12 +63,16 @@ try {
   //configuro el acceso a la carpeta public
   server.use("/public", express.static("public"));
 
+  //rutas de inicio de sesion
+  server.use("/signin/login", loginRouter);
+  server.use("/signin", viewsRouter);
+
   //activo funcionalidades del motor de plantillas
   server.engine("handlebars", engine());
   //defino que es handlebars
   server.set("view engine", "handlebars");
   //defino la ruta hacia las vistas
-  server.set("views", __dirname + "/src/views");
+  server.set("views", path.join(process.cwd(), "src", "views"));
 
   //hace que mi servidor use las rutas del enrutador
   server.use(router);
