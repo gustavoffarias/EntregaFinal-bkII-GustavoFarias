@@ -11,7 +11,7 @@ import {
   read,
   update,
   destroy,
-} from "../../controllers/users.controller.js";
+} from "../../controllers/user.controller.js";
 import validDataUsers from "../../middlewares/validDataUsers.mid.js";
 
 const usersRouter = Router();

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { registerView } from "../../controllers/users.controller.js";
+import { registerView } from "../../controllers/user.controller.js";
 
 const usersViewRouter = Router();
 

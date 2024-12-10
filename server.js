@@ -16,6 +16,8 @@ import path from "path";
 import loginRouter from "./src/routers/login.router.js";
 import viewsRouter from "./src/routers/views.router.js";
 import session from "express-session";
+import sessionFileStore from "session-file-store";
+import userRouter from "./src/routers/user.router.js";
 
 try {
   //primero, creo el server
@@ -47,14 +49,21 @@ try {
   //habilito las cookies
   server.use(cookieParser(process.env.SECRET_KEY));
 
-  const sessionConfig = {
+  const FileStore = sessionFileStore(session);
+
+  const fileStoreConfig = {
+    store: new FileStore({
+      path: "./sessions",
+      ttl: 60,
+      reapInterval: 60,
+    }),
     secret: process.env.SECRET_KEY,
-    cookie: { maxAge: 30000 },
+    cookie: { maxAge: 60000 },
     saveUninitialized: true,
     resave: false,
   };
 
-  server.use(session(sessionConfig));
+  server.use(session(fileStoreConfig));
 
   //activo funcionabilidad de json
   server.use(express.json());
