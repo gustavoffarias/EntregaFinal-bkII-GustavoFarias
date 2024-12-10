@@ -56,8 +56,8 @@ class Controller {
 
   read = async (req, res, next) => {
     try {
-      const { pid } = req.params;
-      const response = await this.manager.read(pid);
+      const { id } = req.params;
+      const response = await this.manager.read(id);
       if (response) {
         return res
           .status(200)
@@ -74,9 +74,9 @@ class Controller {
 
   update = async (req, res, next) => {
     try {
-      const { pid } = req.params;
+      const { id } = req.params;
       const data = req.body;
-      const response = await this.manager.update(pid, data);
+      const response = await this.manager.update(id, data);
       if (response) {
         return res
           .status(200)
@@ -93,8 +93,8 @@ class Controller {
 
   destroy = async (req, res, next) => {
     try {
-      const { pid } = req.params;
-      const response = await this.manager.destroy(pid);
+      const { id } = req.params;
+      const response = await this.manager.destroy(id);
       if (response) {
         return res
           .status(200)

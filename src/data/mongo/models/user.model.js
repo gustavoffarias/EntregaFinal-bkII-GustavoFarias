@@ -2,15 +2,18 @@ import { Schema, model } from "mongoose";
 
 const collection = "users";
 const schema = new Schema({
-  email: { type: String, required: true, unique: true },
+  firstName: { type: String, required: true},
+  lastName: { type: String, required: true},
+  age: { type: Number, required: true},
+  email: { type: String, required: true, unique: true, index: true },
   password: { type: String, required: true },
-  photo: {
+  cartId: {type: Number},
+  role: {
     type: String,
-    default:
-      "https://e7.pngegg.com/pngimages/507/702/png-clipart-profile-icon-simple-user-icon-icons-logos-emojis-users-thumbnail.png",
-  },
-  role: { type: String, enum: ["user", "admin", "prem"], default: "user" },
-  isOnline: { type: Boolean, default: false },
+    enum: ["user", "admin", "prem"],
+    default: "user",
+    index: true,
+  }
 });
 
 const User = model(collection, schema);

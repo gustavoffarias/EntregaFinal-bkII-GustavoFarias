@@ -21,28 +21,28 @@ class MongoManager {
     }
   };
 
-  read = async (pid) => {
+  read = async (id) => {
     try {
-      const one = await this.model.findById(pid);
+      const one = await this.model.findById(id);
       return one;
     } catch (error) {
       throw error;
     }
   };
 
-  update = async (pid, data) => {
+  update = async (id, data) => {
     try {
       const opts = { new: true };
-      const one = await this.model.findByIdAndUpdate(pid, data, opts);
+      const one = await this.model.findByIdAndUpdate(id, data, opts);
       return one;
     } catch (error) {
       throw error;
     }
   };
 
-  destroy = async (pid) => {
+  destroy = async (id) => {
     try {
-      const one = await this.model.findByIdAndDelete(pid);
+      const one = await this.model.findByIdAndDelete(id);
       return one;
     } catch (error) {
       throw error;

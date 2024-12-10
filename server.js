@@ -11,6 +11,7 @@ import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import __dirname from "./utils.js";
 import socketCb from "./src/routers/index.socket.js";
 import dbConnect from "./src/utils/db.utils.js";
+import cookieParser from "cookie-parser";
 
 try {
   //primero, creo el server
@@ -39,6 +40,8 @@ try {
   server.use(morgan("dev"));
   //habilita la lectura de datos complejos en la url
   server.use(express.urlencoded({ extended: true }));
+  //habilito las cookies
+  server.use(cookieParser());
   //activo funcionabilidad de json
   server.use(express.json());
   //middleware: hago que se crucen los origenes de los puertos de back con los de front

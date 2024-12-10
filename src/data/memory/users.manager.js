@@ -86,11 +86,11 @@ class UsersManager {
       const all = await this.readAllUsers();
       const index = all.findIndex((each) => each.id === id);
       if (index === -1) {
-        // Producto no encontrado
+        // User no encontrado
         return null;
       }
-      // Eliminar el producto
-      // Remueve el producto del array
+      // Eliminar el user
+      // Remueve el user del array
       all.splice(index, 1);
       const stringAll = JSON.stringify(all, null, 2);
       await fs.promises.writeFile(this.path, stringAll);
