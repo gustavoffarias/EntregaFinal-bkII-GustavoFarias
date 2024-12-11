@@ -1,6 +1,26 @@
-import { Router } from "express";
-import userManager from "../data/mongo/managers/user.mongo.js";
+//import { Router } from "express";
+//import userManager from "../data/mongo/managers/user.mongo.js";
 
+import { Router } from "express";
+import {
+  registerResponse,
+  loginResponse,
+} from "../data/mongo/managers/user.mongo.js";
+import passport from "passport";
+import { isAuth } from "../middlewares/isAuth.js";
+
+const router = Router();
+
+router.post("/register", passport.authenticate("register"), registerResponse);
+
+router.post("/login", passport.authenticate("login"), loginResponse);
+
+router.get("/private", isAuth, (req, res) => res.send("ruta privada"));
+
+export default router;
+
+/*
+//Implementacion sin PASSPORT, sin DAOS
 const router = Router();
 
 router.post("/register", async (req, res) => {
@@ -28,3 +48,4 @@ router.post("/login", async (req, res) => {
 });
 
 export default router;
+*/

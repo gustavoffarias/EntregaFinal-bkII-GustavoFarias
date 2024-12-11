@@ -1,6 +1,32 @@
-import { UserModel } from "../models/user.model.js";
-import { createHash, isValidPassword } from "../../../utils/utils.js";
+//import { UserModel } from "../models/user.model.js";
+//import { createHash, isValidPassword } from "../../../utils/utils.js";
 
+import * as services from "../../../services/user.services.js";
+
+export const registerResponse = (req, res, next) => {
+  try {
+    res.json({
+      message: 'Register OK',
+      session: req.session
+    })
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const loginResponse = async (req, res, next) => {
+  try {
+    //req.session.passport.user
+    const id = req.session.passport.user || null;
+    const user = await services.getUserById(id);
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+/*
+//IMPLEMENTACION SIN PASSPORT, SIN DAOS
 class UserManager {
   constructor(model) {
     this.model = model;
@@ -43,3 +69,4 @@ class UserManager {
 
 const userManager = new UserManager(UserModel);
 export default userManager;
+*/
