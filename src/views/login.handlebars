@@ -1,27 +1,20 @@
 <section class="w-50">
-  <form class="d-flex flex-column" action="/signin/login" method="post">
+  <form class="d-flex flex-column" action="/user/login" method="post">
     <h1>IGRESAR</h1>
-    <input type="text" name="firstName" id="firstName" placeholder="Nombre" />
-    <input type="text" name="lastName" id="lastName" placeholder="Apellido" />
-    <input type="number" name="age" id="age" placeholder="Edad" />
-    <input type="email" name="email" id="email" placeholder="Email" />
+    <input type="text" name="email" id="email" placeholder="Email" />
     <input
-      type="password"
+      type="text"
       name="password"
       id="password"
       placeholder="Contraseña"
     />
     <input
       type="submit"
-      id="register"
+      id="login"
       class="btn btn-warning"
       value="Ingresar"
     />
   </form>
-  {{! 
-  <article>
-    Ultimo user
-    <span id="update"></span>
-  </article>
-  }}
+
+  <button onclick="location.href='/register'">Registrate AHORA!</button>
 </section>

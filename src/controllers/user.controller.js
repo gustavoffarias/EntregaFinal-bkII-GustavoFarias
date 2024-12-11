@@ -124,26 +124,26 @@ const { create, createGet, readAll, read, update, destroy } = usersController;
 //Backend2
 const users = [
   {
-    username: "Gustavo",
+    firstName: "Gustavo",
     password: "0909",
     admin: true,
   },
   {
-    username: "Lorenzo",
+    firstName: "Lorenzo",
     password: "2323",
     admin: false,
   },
   {
-    username: "Emilse",
+    firstName: "Emilse",
     password: "0707",
     admin: false,
   },
 ];
 
 export const login = (req, res) => {
-  const { username, password } = req.body;
+  const { firstName, password } = req.body;
   const index = users.findIndex(
-    (user) => user.username === username && user.password === password
+    (user) => user.firstName === firstName && user.password === password
   );
   if (index < 0) res.status(401).json({ msg: "Credenciales incorrectas" });
   else {
@@ -151,7 +151,7 @@ export const login = (req, res) => {
     req.session.info = {
       loggedIn: true,
       count: 1,
-      username: user.username,
+      firstName: user.firstName,
       admin: user.admin,
     };
 

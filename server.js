@@ -18,6 +18,7 @@ import viewsRouter from "./src/routers/views.router.js";
 import session from "express-session";
 import sessionFileStore from "session-file-store";
 import userRouter from "./src/routers/user.router.js";
+import MongoStore from "connect-mongo";
 
 try {
   //primero, creo el server
@@ -63,8 +64,24 @@ try {
     resave: false,
   };
 
-  server.use(session(fileStoreConfig));
+  const mongoStoreConfig = {
+    store: MongoStore.create({
+      mongoUrl: process.env.DB_LINK,
+      // crypto: { secret: '1234' },
+      ttl: 60,
+    }),
+    secret: "1234",
+    cookie: { maxAge: 60000 },
+    saveUninitialized: true,
+    resave: false,
+  };
+  
+  //Con file system  para menejo de sessions
+  //server.use(session(fileStoreConfig));
 
+  //Con Mongo Store para menejo de sessions
+  server.use(session(mongoStoreConfig));
+  
   //activo funcionabilidad de json
   server.use(express.json());
   //middleware: hago que se crucen los origenes de los puertos de back con los de front
@@ -73,8 +90,8 @@ try {
   server.use("/public", express.static("public"));
 
   //rutas de inicio de sesion
-  server.use("/signin/login", loginRouter);
-  server.use("/signin", viewsRouter);
+  server.use("/user", userRouter);
+  server.use("/", viewsRouter);
 
   //activo funcionalidades del motor de plantillas
   server.engine("handlebars", engine());
