@@ -1,4 +1,5 @@
 import { UserModel } from "../models/user.model.js";
+import { createHash, isValidPassword } from "../../../utils/utils.js";
 
 class UserManager {
   constructor(model) {
@@ -6,10 +7,14 @@ class UserManager {
   }
   async register(user) {
     try {
-      const { email } = user;
+      const { email, password } = user;
       const exists = await this.getByEmail(email);
-      if (!exists) return await this.model.create(user);
-      return null;
+      if (exists) throw new Error("User already registered");
+      if (!exists)
+        return await this.model.create({
+          ...user,
+          password: createHash(password),
+        });
     } catch (error) {
       throw new Error(error);
     }
@@ -25,7 +30,11 @@ class UserManager {
 
   async login(email, password) {
     try {
-      return await this.model.findOne({email, password});
+      const userExists = await this.getByEmail(email);
+      if (!userExists) throw new Error("User not found");
+      const passValid = isValidPassword(password, userExists);
+      if (!passValid) throw new Error("Invalid credentials");
+      return userExists;
     } catch (error) {
       throw new Error(error);
     }

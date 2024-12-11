@@ -162,5 +162,29 @@
     "email": "lo@live.com",
     "password": "1234",
     "id": "e62eab96be2688d57e3d594c"
+  },
+  {
+    "firstName": "Lo",
+    "lastName": "Far",
+    "age": "1",
+    "email": "lofar@live.com",
+    "password": "1234",
+    "id": "07cc0815589c3f6d06db1f80"
+  },
+  {
+    "firstName": "Lo",
+    "lastName": "Far",
+    "age": "1",
+    "email": "lofar@live.com",
+    "password": "1234",
+    "id": "e9a6e221584bc4768f3aa1f5"
+  },
+  {
+    "firstName": "GustavoA",
+    "lastName": "Farias",
+    "age": "1",
+    "email": "gustavo.f.farias@hotmail.com",
+    "password": "1234",
+    "id": "7a9963349102ba1435bf9f61"
   }
 ]
