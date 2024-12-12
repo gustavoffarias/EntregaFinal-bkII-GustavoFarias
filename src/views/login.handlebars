@@ -1,20 +1,13 @@
 <section class="w-50">
+  <h2>Login with GitHub</h2>
+  <a href="/user/register-github" class="btn btn-primary">Login with GitHub</a>
+
   <form class="d-flex flex-column" action="/user/login" method="post">
-    <h1>IGRESAR</h1>
+    <h2>IGRESAR</h2>
     <input type="text" name="email" id="email" placeholder="Email" />
-    <input
-      type="text"
-      name="password"
-      id="password"
-      placeholder="Contraseña"
-    />
-    <input
-      type="submit"
-      id="login"
-      class="btn btn-warning"
-      value="Ingresar"
-    />
+    <input type="text" name="password" id="password" placeholder="Contraseña" />
+    <input type="submit" id="login" class="btn btn-warning" value="Ingresar" />
   </form>
 
-  <button onclick="location.href='/register'">Registrate AHORA!</button>
+  <button class="btn btn-primary" onclick="location.href='/register'">Registrate AHORA!</button>
 </section>

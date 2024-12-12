@@ -20,7 +20,8 @@ import sessionFileStore from "session-file-store";
 import userRouter from "./src/routers/user.router.js";
 import MongoStore from "connect-mongo";
 import passport from "passport";
-import './src/auth/local-strategy.js';
+import "./src/auth/local-strategy.js";
+import "./src/auth/github-strategy.js";
 
 try {
   //primero, creo el server
@@ -79,13 +80,13 @@ try {
     saveUninitialized: true,
     resave: false,
   };
-  
+
   //Con file system  para menejo de sessions
   //server.use(session(fileStoreConfig));
 
   //Con Mongo Store para menejo de sessions
   server.use(session(mongoStoreConfig));
-  
+
   //activo funcionabilidad de json
   server.use(express.json());
   //middleware: hago que se crucen los origenes de los puertos de back con los de front
