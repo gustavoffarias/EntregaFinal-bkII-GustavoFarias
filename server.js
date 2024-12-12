@@ -19,6 +19,8 @@ import session from "express-session";
 import sessionFileStore from "session-file-store";
 import userRouter from "./src/routers/user.router.js";
 import MongoStore from "connect-mongo";
+import passport from "passport";
+import './src/auth/local-strategy.js';
 
 try {
   //primero, creo el server
@@ -50,6 +52,7 @@ try {
   //habilito las cookies
   server.use(cookieParser(process.env.SECRET_KEY));
 
+  /*
   const FileStore = sessionFileStore(session);
 
   const fileStoreConfig = {
@@ -63,15 +66,16 @@ try {
     saveUninitialized: true,
     resave: false,
   };
+  */
 
   const mongoStoreConfig = {
     store: MongoStore.create({
       mongoUrl: process.env.DB_LINK,
-      // crypto: { secret: '1234' },
-      ttl: 60,
+      crypto: { secret: process.env.SECRET_KEY },
+      ttl: 100,
     }),
-    secret: "1234",
-    cookie: { maxAge: 60000 },
+    secret: process.env.SECRET_KEY,
+    cookie: { maxAge: 1800000 },
     saveUninitialized: true,
     resave: false,
   };
@@ -88,6 +92,9 @@ try {
   server.use(cors());
   //configuro el acceso a la carpeta public
   server.use("/public", express.static("public"));
+
+  server.use(passport.initialize());
+  server.use(passport.session());
 
   //rutas de inicio de sesion
   server.use("/user", userRouter);
