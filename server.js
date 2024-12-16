@@ -22,6 +22,7 @@ import MongoStore from "connect-mongo";
 import passport from "passport";
 import "./src/auth/local-strategy.js";
 import "./src/auth/github-strategy.js";
+import "./src/auth/google-strategy.js";
 
 try {
   //primero, creo el server

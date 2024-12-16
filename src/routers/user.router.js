@@ -5,11 +5,15 @@ import { Router } from "express";
 import {
   registerResponse,
   loginResponse,
-  githubResponse,
+  githubGoogleResponse,
+  registerJWT,
+  loginJWT,
+  privateDataJWT
 } from "../data/mongo/managers/user.mongo.js";
 import passport from "passport";
 import { isAuth } from "../middlewares/isAuth.js";
 import { passportCall } from "../middlewares/passportCall.js";
+import { checkAuthCookies, checkAuthHeaders } from "../middlewares/checkAuth.js";
 
 const router = Router();
 
@@ -19,22 +23,43 @@ router.post("/login", passport.authenticate("login"), loginResponse);
 
 //Inicio de sesion con GitHub
 
-router.get('/register-github', passportCall('github', { scope: [ 'user:email' ] }));  
+router.get(
+  "/register-github",
+  passportCall("github", { scope: ["user:email"] })
+);
 
-//router.get('/profile-github', passportCall('github', {  scope: [ 'user:email' ]  } ), githubResponse);
+router.get(
+  "/profile-github",
+  passportCall("github", { scope: ["user:email"] }),
+  githubGoogleResponse
+);
 
+/*
 router.get('/profile-github', passport.authenticate('github', {
+
   failureRedirect: '/login', ///error-login
   successRedirect: '/profile', 
   passReqToCallback: true
 }));
+*/
 
-router.get('/logout', (req, res) => {
-  req.session.destroy()
-  res.send('logout ok')
+//Inicio de sesion con Google
+router.get(
+  "/oauth2/redirect/accounts.google.com",
+  passportCall("google", { assignProperty: "user" }),
+  githubGoogleResponse
+);
+
+router.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.send("logout ok");
 });
 
 router.get("/private", isAuth, (req, res) => res.send("ruta privada"));
+
+router.get("/private-headers", checkAuthHeaders, privateDataJWT);
+
+router.get("/private-cookies", checkAuthCookies, privateDataJWT);
 
 export default router;
 

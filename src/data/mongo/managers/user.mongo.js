@@ -1,6 +1,7 @@
 //import { UserModel } from "../models/user.model.js";
 //import { createHash, isValidPassword } from "../../../utils/utils.js";
 
+import { generateToken } from "../../../auth/jwt.js";
 import * as services from "../../../services/user.services.js";
 
 export const registerResponse = (req, res, next) => {
@@ -14,6 +15,7 @@ export const registerResponse = (req, res, next) => {
   }
 };
 
+
 export const loginResponse = async (req, res, next) => {
   try {
     const id = req.session.passport.user || null;
@@ -24,9 +26,9 @@ export const loginResponse = async (req, res, next) => {
   }
 };
 
-export const githubResponse = (req, res, next) => {
+export const githubGoogleResponse = (req, res, next) => {
   try {
-    const { firstName, lastName, email, isGithub } = req.user;
+    const { firstName, lastName, email, isGithub, isGoogle, image } = req.user;
     res.json({
       msg: "Register/Login Github OK",
       session: req.session,
@@ -35,7 +37,42 @@ export const githubResponse = (req, res, next) => {
         lastName,
         email,
         isGithub,
+        isGoogle,
+        image,
       },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+//Implementacion JWT
+export const registerJWT = async (req, res, next) => {
+  try {
+    const user = await services.register(req.body);
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const loginJWT = async (req, res, next) => {
+  try {
+    const user = await services.login(req.body);
+    const token = generateToken(user);
+    // res.header("Authorization", token).json({ message: "Login OK" });
+    res.cookie('token', token, { httpOnly: true }).json({ message: 'Login OK' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const privateDataJWT = (req, res, next) => {
+  try {
+    if (!req.user)
+      throw new Error("No se puede acceder a los datos del usuario");
+    res.json({
+      user: req.user,
     });
   } catch (error) {
     next(error);
