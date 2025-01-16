@@ -17,9 +17,9 @@ import { checkAuthCookies, checkAuthHeaders } from "../middlewares/checkAuth.js"
 
 const router = Router();
 
-router.post("/register", passport.authenticate("register"), registerResponse);
+router.post("/register", passport.authenticate("register"), registerJWT);
 
-router.post("/login", passport.authenticate("login"), loginResponse);
+router.post("/login", passport.authenticate("login"), loginJWT);
 
 //Inicio de sesion con GitHub
 

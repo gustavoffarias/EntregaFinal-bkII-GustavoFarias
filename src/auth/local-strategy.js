@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import * as services from "../services/user.services.js";
+import { userService } from "../services/user.services.js";
 
 const strategyConfig = {
   usernameField: "email",
@@ -10,9 +10,9 @@ const strategyConfig = {
 
 const register = async (req, email, password, done) => {
   try {
-    const user = await services.getUserByEmail(email);
+    const user = await userService.getUserByEmail(email);
     if (user) return done(null, false, { messages: "User already exists" });
-    const newUser = await services.register(req.body);
+    const newUser = await userService.register(req.body);
     return done(null, newUser);
   } catch (error) {
     done(error);
@@ -21,7 +21,7 @@ const register = async (req, email, password, done) => {
 
 const login = async (req, email, password, done) => {
   try {
-    const userLogin = await services.login(email, password);
+    const userLogin = await userService.login(email, password);
     if (userLogin) return done(null, userLogin);
   } catch (error) {
     done(error);
@@ -44,7 +44,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await services.getUserById(id);
+    const user = await userService.getUserById(id);
     return done(null, user);
   } catch (error) {
     done(error);

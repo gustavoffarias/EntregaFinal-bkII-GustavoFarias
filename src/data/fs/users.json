@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "675fa2f04d37e03e783c93e1",
+    "firstName": "Gustavo",
+    "lastName": "Farias",
+    "email": "gustavo.francisco.f@gmail.com",
+    "password": "$2b$10$GbYcLdGSe4.CfDq40dyKReL3MwNU1lsmXNnO8S9duxCJFYIQIqsv.",
+    "role": "user",
+    "image": "https://lh3.googleusercontent.com/a/ACg8ocL6GitUQS8FN-4vWBN6x4u7Cu4yJM…",
+    "isGithub": false,
+    "isGoogle": true,
+    "__v": 0
+  },
+  {
+    "firstName": "Gustavo",
+    "lastName": "Farias",
+    "age": "32",
+    "email": "gustavo.f.farias1000@hotmail.com",
+    "password": "1000",
+    "id": "2aaefc91319ab3c9bb681d9d"
+  },
+  {
+    "firstName": "Gustavo",
+    "lastName": "Farias",
+    "age": "33",
+    "email": "gustavo.f.farias111@hotmail.com",
+    "password": "111",
+    "id": "fa788d052de9eb47bf68f39a"
+  },
+  {
+    "firstName": "Gustavo2",
+    "lastName": "Farias2",
+    "age": "33",
+    "email": "gustavo.f.farias2@hotmail.com",
+    "password": "222",
+    "id": "5e33c5d00abd33528b4313a8"
+  }
+]

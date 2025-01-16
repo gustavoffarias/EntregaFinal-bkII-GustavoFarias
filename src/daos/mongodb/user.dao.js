@@ -1,9 +1,11 @@
-import { UserModel } from "./user.model.js";
+import { UserModel } from "../models/user.model.js";
+import MongoDao from "./mongo.dao.js";
 
-class UserDao {
-  constructor(model) {
-    this.model = model;
+class UserDaoMongo extends MongoDao {
+  constructor() {
+    super(UserModel)
   }
+
   async register(user) {
     try {
       return await this.model.create(user);
@@ -29,5 +31,5 @@ class UserDao {
   }
 }
 
-const userDao = new UserDao(UserModel);
+export const userDao = new UserDaoMongo();
 export default userDao;
