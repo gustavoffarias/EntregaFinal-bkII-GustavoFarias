@@ -1,7 +1,10 @@
 <section class="w-50">
   <h2>Login with GitHub</h2>
   <a href="/user/register-github" class="btn btn-primary">Login with GitHub</a>
-  <a href="/user/oauth2/redirect/accounts.google.com" class="btn btn-primary">Login with Google</a>
+  <a
+    href="/user/oauth2/redirect/accounts.google.com"
+    class="btn btn-primary"
+  >Login with Google</a>
 
   <form class="d-flex flex-column" action="/user/login" method="post">
     <h2>IGRESAR</h2>
@@ -10,5 +13,17 @@
     <input type="submit" id="login" class="btn btn-warning" value="Ingresar" />
   </form>
 
-  <button class="btn btn-primary" onclick="location.href='/register'">Registrate AHORA!</button>
+  <button class="btn btn-primary" onclick="location.href='/register'">Registrate
+    AHORA!</button>
+
+  <form id="formJwt">
+    <h2>Prueba JWT</h2>
+    email:
+    <input type="text" name="emailJwt" id="emailJwt" />
+    password:
+    <input type="password" name="passwordJwt" id="passwordJwt" />
+    <input type="submit" value="TEST" />
+  </form>
+  <button id="boton">LOGIN</button> 
+  <script src="/public/js/jwt.js"></script>
 </section>

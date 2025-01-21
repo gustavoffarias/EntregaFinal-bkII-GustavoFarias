@@ -60,7 +60,6 @@ export const loginJWT = async (req, res, next) => {
   try {
     const user = await services.login(req.body);
     const token = generateToken(user);
-    // res.header("Authorization", token).json({ message: "Login OK" });
     res.cookie('token', token, { httpOnly: true }).json({ message: 'Login OK' });
   } catch (error) {
     next(error);

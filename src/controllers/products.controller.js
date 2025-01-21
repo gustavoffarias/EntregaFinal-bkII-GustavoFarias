@@ -28,6 +28,27 @@ async function getAllProducts(req, res, next) {
   }
 }
 
+export const createProduct = async (req, res)=>{
+  try {
+      console.log(req.body);
+      const product = req.body;
+      const newProduct = await productManager.createProduct(product);
+      res.json(newProduct);
+  } catch (error) {
+      res.status(404).json({ message: error.message });
+  }
+}
+
+export const deleteProducts = async(req, res)=>{
+  try {
+      await productManager.deleteAllProducts();
+      res.send('products deleted successfully')
+  } catch (error) {
+      res.status(404).json({ message: error.message });
+
+  }
+}
+
 /*async function createGet(req, res, next) {
   try {
     const { title, photo, category, price } = req.params;

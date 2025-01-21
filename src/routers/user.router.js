@@ -12,8 +12,10 @@ import {
 } from "../data/mongo/managers/user.mongo.js";
 import passport from "passport";
 import { isAuth } from "../middlewares/isAuth.js";
-import { passportCall } from "../middlewares/passportCall.js";
-import { checkAuthCookies, checkAuthHeaders } from "../middlewares/checkAuth.js";
+//import { passportCall } from "../middlewares/passportCall.js";
+//import { checkAuthCookies, checkAuthHeaders } from "../middlewares/checkAuth.js";
+import { passportCall } from "../passport/passportCall.js";
+import { roleAuth } from '../middlewares/roleAuth.js'
 
 const router = Router();
 
@@ -57,9 +59,11 @@ router.get("/logout", (req, res) => {
 
 router.get("/private", isAuth, (req, res) => res.send("ruta privada"));
 
-router.get("/private-headers", checkAuthHeaders, privateDataJWT);
+router.get("/private-headers", passportCall('jwt'), privateDataJWT);
 
-router.get("/private-cookies", checkAuthCookies, privateDataJWT);
+router.get("/private-cookies", [passportCall('jwtCookies'), roleAuth('user')], privateDataJWT);
+
+router.get("/private-cookies-admin", [passportCall('jwtCookies'), roleAuth('admin')], privateDataJWT);
 
 export default router;
 
